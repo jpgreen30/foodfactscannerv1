@@ -101,7 +101,7 @@ const ScanResultPreview = () => {
 
             {/* CTA */}
             <div className="p-6 bg-muted/30 border-t border-border">
-              <Link to="/auth">
+              <Link to="/auth?demo=1">
                 <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6">
                   Start Free Trial — Scan Now
                   <ArrowRight className="ml-2 w-5 h-5" />

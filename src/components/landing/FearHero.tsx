@@ -100,7 +100,7 @@ const FearHero = () => {
 
             {/* Primary CTA - SCARCITY + URGENCY */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link to="/auth">
+              <Link to="/auth?demo=1">
                 <Button 
                   size="lg" 
                   className="w-full sm:w-auto bg-danger hover:bg-danger/90 text-white font-bold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all group animate-pulse"
@@ -188,7 +188,7 @@ const FearHero = () => {
                 LIMITED TIME TRIAL — GET 10 FREE SCANS!
               </span>
             </div>
-            <Link to="/auth">
+            <Link to="/auth?demo=1">
               <Button 
                 size="sm" 
                 variant="secondary"

@@ -54,7 +54,7 @@ const FinalScareCTA = () => {
             viewport={{ once: true }}
             className="pt-4"
           >
-            <Link to="/auth">
+            <Link to="/auth?demo=1">
               <Button 
                 size="xl" 
                 className="bg-primary-foreground hover:bg-primary-foreground/90 text-primary font-black text-xl px-12 py-8 shadow-lg"
