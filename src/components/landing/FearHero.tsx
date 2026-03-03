@@ -100,7 +100,7 @@ const FearHero = () => {
 
             {/* Primary CTA - SCARCITY + URGENCY */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link to="/auth?demo=1">
+              <a href="/auth?demo=1">
                 <Button 
                   size="lg" 
                   className="w-full sm:w-auto bg-danger hover:bg-danger/90 text-white font-bold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all group animate-pulse"
@@ -109,7 +109,7 @@ const FearHero = () => {
                   START FREE TRIAL
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </Link>
+              </a>
             </div>
 
             {/* Secondary action - TRUST + SCARCITY */}
@@ -188,7 +188,7 @@ const FearHero = () => {
                 LIMITED TIME TRIAL — GET 10 FREE SCANS!
               </span>
             </div>
-            <Link to="/auth?demo=1">
+            <a href="/auth?demo=1">
               <Button 
                 size="sm" 
                 variant="secondary"
@@ -197,7 +197,7 @@ const FearHero = () => {
                 Start Free Trial
                 <ArrowRight className="ml-1 w-4 h-4" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>

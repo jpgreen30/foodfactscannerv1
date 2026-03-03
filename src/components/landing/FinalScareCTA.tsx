@@ -54,7 +54,7 @@ const FinalScareCTA = () => {
             viewport={{ once: true }}
             className="pt-4"
           >
-            <Link to="/auth?demo=1">
+            <a href="/auth?demo=1">
               <Button 
                 size="xl" 
                 className="bg-primary-foreground hover:bg-primary-foreground/90 text-primary font-black text-xl px-12 py-8 shadow-lg"
@@ -62,7 +62,7 @@ const FinalScareCTA = () => {
                 <ScanBarcode className="w-7 h-7 mr-3" />
                 START FREE TRIAL
               </Button>
-            </Link>
+            </a>
           </motion.div>
 
           <p className="text-primary-foreground/60 text-sm">
