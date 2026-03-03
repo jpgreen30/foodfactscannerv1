@@ -21,6 +21,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check for demo mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const isDemo = urlParams.get('demo') === '1' || localStorage.getItem('demo_mode') === 'true';
+    
+    if (isDemo) {
+      // Set mock demo user
+      const demoUser = {
+        id: 'demo-user-123',
+        email: 'demo@foodfactscanner.com',
+        user_metadata: { firstName: 'Demo', lastName: 'User' },
+        aud: 'authenticated',
+        role: 'authenticated',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      } as User;
+      
+      const demoSession = {
+        access_token: 'demo-token',
+        refresh_token: 'demo-refresh',
+        expires_in: 3600,
+        token_type: 'bearer',
+        user: demoUser,
+      } as Session;
+      
+      setUser(demoUser);
+      setSession(demoSession);
+      setLoading(false);
+      return;
+    }
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {

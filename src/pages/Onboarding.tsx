@@ -12,11 +12,23 @@ const Onboarding = () => {
 
   useEffect(() => {
     if (!loading && !user) {
+      // Demo mode bypass
+      const urlParams = new URLSearchParams(window.location.search);
+      const isDemo = urlParams.get('demo') === '1' || localStorage.getItem('demo_mode') === 'true';
+      if (isDemo) {
+        navigate("/scanner");
+        return;
+      }
       navigate("/auth");
       return;
     }
 
     if (user) {
+      // Demo user auto-completes onboarding
+      if (user.id === 'demo-user-123') {
+        navigate("/scanner");
+        return;
+      }
       checkOnboardingStatus();
     }
   }, [user, loading, navigate]);

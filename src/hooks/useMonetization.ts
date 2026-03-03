@@ -33,6 +33,23 @@ export function useMonetization() {
   const fetchState = useCallback(async () => {
     if (!user) return;
     
+    // Demo user: unlimited scans, no DB calls
+    if (user.id === 'demo-user-123') {
+      setState({
+        subscriptionStatus: 'free_trial',
+        subscriptionTier: 'free',
+        trialStatus: 'active',
+        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+        totalScansUsed: 0,
+        highIntentUser: true,
+        highRiskFlag: false,
+        isUnlimited: true,
+        isBlocked: false,
+        loading: false,
+      });
+      return;
+    }
+    
     try {
       const { data } = await supabase
         .from('profiles')
@@ -82,6 +99,13 @@ export function useMonetization() {
   }) => {
     if (!user) return null;
 
+    // Demo mode: skip DB writes
+    if (user.id === 'demo-user-123') {
+      console.log('[Demo] Scan recorded locally (no DB write)');
+      await fetchState();
+      return { demo: true };
+    }
+
     try {
       const { data, error } = await supabase.functions.invoke('on-scan-completed', {
         body: scanData,
@@ -103,6 +127,13 @@ export function useMonetization() {
 
   const recordUpgrade = useCallback(async (newTier: string, previousTier?: string) => {
     if (!user) return null;
+
+    // Demo mode: skip upgrade recording
+    if (user.id === 'demo-user-123') {
+      console.log('[Demo] Upgrade recorded locally (no DB write)');
+      await fetchState();
+      return { demo: true };
+    }
 
     try {
       const { data, error } = await supabase.functions.invoke('on-subscription-upgrade', {

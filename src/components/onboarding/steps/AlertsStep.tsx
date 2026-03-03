@@ -3,11 +3,7 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Bell, Phone, Shield, AlertTriangle, Zap, Lock, MessageSquare } from "lucide-react";
-import { Capacitor } from "@capacitor/core";
-import { PushNotifications } from "@capacitor/push-notifications";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { Phone, Shield, AlertTriangle, Zap, Lock, MessageSquare } from "lucide-react";
 
 interface AlertsStepProps {
   data: {
@@ -20,9 +16,6 @@ interface AlertsStepProps {
 }
 
 export const AlertsStep = ({ data, onChange }: AlertsStepProps) => {
-  const [isRequestingPush, setIsRequestingPush] = useState(false);
-  const { toast } = useToast();
-
   const formatPhoneNumber = (value: string) => {
     const digits = value.replace(/\D/g, "");
     if (digits.length <= 3) return digits;
@@ -33,87 +26,6 @@ export const AlertsStep = ({ data, onChange }: AlertsStepProps) => {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
     onChange({ phone: formatted });
-  };
-
-  const requestPushNotifications = async () => {
-    setIsRequestingPush(true);
-    
-    try {
-      // Check if we're on a native platform
-      if (Capacitor.isNativePlatform()) {
-        const permResult = await PushNotifications.requestPermissions();
-        
-        if (permResult.receive === "granted") {
-          await PushNotifications.register();
-          onChange({ pushEnabled: true });
-          toast({
-            title: "Push Notifications Enabled!",
-            description: "You'll receive instant alerts about FDA recalls.",
-          });
-        } else {
-          toast({
-            title: "Permission Denied",
-            description: "You can enable notifications later in Settings.",
-            variant: "destructive",
-          });
-        }
-      } else {
-        // Web push notifications
-        if ("Notification" in window) {
-          const permission = await Notification.requestPermission();
-          
-          if (permission === "granted") {
-            onChange({ pushEnabled: true });
-            
-            // Try to register with service worker
-            if ("serviceWorker" in navigator && "PushManager" in window) {
-              const registration = await navigator.serviceWorker.ready;
-              const subscription = await (registration as any).pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: undefined, // Would need VAPID key
-              }).catch(() => null);
-              
-              if (subscription) {
-                // Save subscription to backend
-                await supabase.functions.invoke("register-push-token", {
-                  body: {
-                    token: JSON.stringify(subscription),
-                    platform: "web",
-                    deviceName: navigator.userAgent,
-                  },
-                });
-              }
-            }
-            
-            toast({
-              title: "Push Notifications Enabled!",
-              description: "You'll receive instant alerts about FDA recalls.",
-            });
-          } else {
-            toast({
-              title: "Permission Denied",
-              description: "You can enable notifications later in Settings.",
-              variant: "destructive",
-            });
-          }
-        } else {
-          toast({
-            title: "Not Supported",
-            description: "Your browser doesn't support push notifications.",
-            variant: "destructive",
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Push notification error:", error);
-      toast({
-        title: "Error",
-        description: "Could not enable push notifications. Try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsRequestingPush(false);
-    }
   };
 
   return (
@@ -136,10 +48,10 @@ export const AlertsStep = ({ data, onChange }: AlertsStepProps) => {
         </div>
         
         <h2 className="text-2xl font-bold text-foreground">
-          🚨 Emergency Recall Line
+          🚨 Emergency Recall Alerts
         </h2>
         <p className="text-muted-foreground text-sm">
-          The FDA is too slow. Get alerted <span className="text-danger font-semibold">BEFORE</span> it's on the news.
+          Get notified by <span className="text-danger font-semibold">SMS</span> when dangerous baby food is recalled.
         </p>
       </motion.div>
 
@@ -231,34 +143,6 @@ export const AlertsStep = ({ data, onChange }: AlertsStepProps) => {
         </div>
       </motion.div>
 
-      {/* Push Notifications */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        <Button
-          onClick={requestPushNotifications}
-          disabled={isRequestingPush || data.pushEnabled}
-          className={`w-full h-12 gap-2 ${
-            data.pushEnabled 
-              ? "bg-safe hover:bg-safe/90 text-white" 
-              : "bg-muted hover:bg-muted/80 text-foreground border border-border"
-          }`}
-        >
-          <Bell className={`w-5 h-5 ${data.pushEnabled ? "" : "animate-pulse"}`} />
-          {isRequestingPush 
-            ? "Enabling..." 
-            : data.pushEnabled 
-              ? "✓ Push Notifications Enabled" 
-              : "Enable Push Notifications"
-          }
-        </Button>
-        <p className="text-xs text-center text-muted-foreground mt-2">
-          Get instant alerts even when the app is closed
-        </p>
-      </motion.div>
-
       {/* Security Badge */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -272,3 +156,5 @@ export const AlertsStep = ({ data, onChange }: AlertsStepProps) => {
     </div>
   );
 };
+
+export default AlertsStep;
