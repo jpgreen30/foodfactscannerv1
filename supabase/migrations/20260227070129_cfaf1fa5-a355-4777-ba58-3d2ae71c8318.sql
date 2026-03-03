@@ -1,0 +1,1 @@
+ALTER TABLE public.profiles ALTER COLUMN scan_credits_remaining SET DEFAULT 10;

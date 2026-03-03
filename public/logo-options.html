@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodFactScanner Logo Options</title>
+    <style>
+        body { font-family: Inter, -apple-system, sans-serif; background: #0a0a0a; color: #fff; padding: 40px; max-width: 1200px; margin: 0 auto; }
+        h1 { color: #14b8a6; margin-bottom: 40px; }
+        .logo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .logo-card { background: #1a1a1a; border-radius: 12px; padding: 30px; text-align: center; border: 1px solid #333; }
+        .logo-card img { width: 200px; height: 200px; object-fit: contain; margin: 0 auto 20px; background: white; border-radius: 8px; padding: 20px; }
+        .logo-card h3 { color: #14b8a6; margin-bottom: 10px; }
+        .logo-card p { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .usage { background: #111; padding: 20px; border-radius: 8px; margin-top: 40px; }
+        .usage h2 { color: #fbbf24; margin-bottom: 15px; }
+        .usage code { display: block; background: #222; padding: 15px; border-radius: 6px; overflow-x: auto; color: #7dd3fc; }
+    </style>
+</head>
+<body>
+    <h1>FoodFactScanner — New Logo Options</h1>
+    
+    <div class="logo-grid">
+        <div class="logo-card">
+            <img src="logo-new-1.svg" alt="Logo Option 1">
+            <h3>Option 1: Shield Scanner</h3>
+            <p>Shield (security) + scanner crosshairs + baby food jar with warning symbol. Conveys safety, scanning, and toxin detection.</p>
+            <p><strong>Colors:</strong> Teal gradient shield, white scanner, yellow jar, red warning</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="logo-new-2.svg" alt="Logo Option 2">
+            <h3>Option 2: Bottle + Radar</h3>
+            <p>Stylized baby bottle with scanning crosshairs, protected by an arc. Clean, modern, direct baby food safety association.</p>
+            <p><strong>Colors:</strong> Teal bottle, yellow protective arc, white scan lines</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="logo-new-3.svg" alt="Logo Option 3">
+            <h3>Option 3:雷达检测</h3>
+            <p>Circular badge with radar scanning lines, apple/food icon with leaf, and safety checkmark. Emphasizes health, scanning, and approval.</p>
+            <p><strong>Colors:</strong> Teal badge, red apple arcs, green leaf, white checkmark</p>
+        </div>
+    </div>
+
+    <div class="usage">
+        <h2>How to Use</h2>
+        <p>Copy the SVG file to your project's <code>src/assets/</code> folder and import it in your React components:</p>
+        <code>
+import logoImage from "@/assets/logo-new-1.svg";<br>
+// or whichever option you choose<br><br>
+&lt;Logo src={logoImage} alt="FoodFactScanner" size="md" /&gt;
+        </code>
+        <p style="margin-top: 20px;">Update the <code>Logo.tsx</code> component to use the new SVG:</p>
+        <code>
+// In src/components/Logo.tsx<br>
+import logoImage from "@/assets/logo-new-1.svg";<br><br>
+export const Logo = ({ size = "md", className }) => {<br>
+&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src={logoImage} alt="FoodFactScanner" className={...} /&gt;<br>
+&nbsp;&nbsp;);<br>
+};
+        </code>
+    </div>
+</body>
+</html>

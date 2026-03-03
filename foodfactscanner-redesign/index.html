@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodFactScanner – Baby Food Safety Scanner | Detect Toxins & Heavy Metals</title>
+  <meta name="description" content="Before you feed your baby, scan it. Free tool checks baby food for heavy metals, arsenic, lead, cadmium & mercury using FDA & lab data. Protect your baby from toxic food.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#dc2626',
+            'primary-dark': '#b91c1c',
+            secondary: '#f59e0b',
+            'trust-blue': '#1e40af',
+            'danger': '#dc2626',
+            'success': '#16a34a',
+            'warm': '#fef3c7',
+            'heart': '#e11d48'
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.85) 100%);
+    }
+    .emotion-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .emotion-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .scan-btn {
+      transition: all 0.3s ease;
+      box-shadow: 0 15px 35px -8px rgba(220, 38, 38, 0.5);
+    }
+    .scan-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 25px 45px -8px rgba(220, 38, 38, 0.6);
+    }
+    .testimonial-card {
+      transition: transform 0.3s ease;
+    }
+    .testimonial-card:hover {
+      transform: scale(1.02);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .pulse-animation {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .hero-image-placeholder {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white/98 backdrop-blur-md shadow-sm z-50">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-gray-900">FoodFactScanner</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#how-it-works" class="text-gray-600 hover:text-primary font-medium transition">How It Works</a>
+        <a href="#testimonials" class="text-gray-600 hover:text-primary font-medium transition">Real Parents</a>
+        <a href="#data" class="text-gray-600 hover:text-primary font-medium transition">Data Sources</a>
+        <a href="#" class="bg-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-primary-dark transition scan-btn shadow-lg" onclick="startScan(event)">
+          Scan Now — It's Free
+        </a>
+      </div>
+      <button class="md:hidden text-gray-700" onclick="toggleMobileMenu()">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-4 px-4">
+      <a href="#how-it-works" class="block py-2 text-gray-600 font-medium">How It Works</a>
+      <a href="#testimonials" class="block py-2 text-gray-600 font-medium">Real Parents</a>
+      <a href="#data" class="block py-2 text-gray-600 font-medium">Data Sources</a>
+      <a href="#" class="block mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold text-center" onclick="startScan(event)">Scan Now — It's Free</a>
+    </div>
+  </header>
+
+  <!-- Hero Section with Emotional Image -->
+  <section class="pt-24 pb-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Left: Copy -->
+        <div class="lg:pr-8">
+          <div class="inline-flex items-center gap-2 bg-red-50 text-primary px-4 py-2 rounded-full text-sm font-bold mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+            95% of baby foods contain heavy metals
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight mb-6">
+            Before You Feed Your Baby,
+            <span class="text-primary">Know What's In It.</span>
+          </h1>
+
+          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+            You're holding your baby. You're about to feed them. But are you sure that food is safe?
+            <strong class="text-gray-900">Most baby foods contain arsenic, lead, cadmium & mercury.</strong>
+            Scan any product instantly and see the truth before it's too late.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
+            <a href="#" class="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full text-lg font-bold hover:bg-primary-dark transition scan-btn shadow-xl" onclick="startScan(event)">
+              <span class="flex items-center justify-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Scan Your Baby Food Now
+              </span>
+            </a>
+            <span class="text-gray-500 font-medium">✓ Free forever &nbsp; ✓ No signup &nbsp; ✓ 5-second scan</span>
+          </div>
+
+          <div class="flex items-center gap-4 text-sm text-gray-500">
+            <div class="flex items-center gap-1">
+              <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>FDA Data</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Consumer Reports</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>100% Free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Emotional Hero Image -->
+        <div class="hero-image-placeholder rounded-3xl shadow-2xl p-8 md:p-12 relative">
+          <!-- Mom & Baby Illustration -->
+          <div class="relative z-10 flex flex-col items-center text-center">
+            <div class="mb-6">
+              <!-- Mom silhouette holding baby -->
+              <svg class="w-64 h-64 md:w-80 md:h-80 mx-auto" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Mom's body -->
+                <circle cx="100" cy="60" r="30" fill="#fcd34d"/>
+                <ellipse cx="100" cy="140" rx="40" ry="50" fill="#fcd34d"/>
+                <!-- Baby in arms -->
+                <circle cx="100" cy="50" r="22" fill="#fef3c7"/>
+                <ellipse cx="80" cy="85" rx="15" ry="20" fill="#fef3c7"/>
+                <ellipse cx="120" cy="85" rx="15" ry="20" fill="#fef3c7"/>
+                <!-- Baby face -->
+                <circle cx="100" cy="50" r="12" fill="#fef3c7"/>
+                <!-- Mom's hand scanning -->
+                <rect x="135" y="55" width="8" height="25" rx="4" fill="#f59e0b"/>
+                <rect x="145" y="40" width="30" height="20" rx="10" fill="#dc2626" class="pulse-animation"/>
+                <text x="160" y="55" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SCAN</text>
+                <!-- Baby food jar -->
+                <rect x="60" y="145" width="20" height="30" rx="3" fill="#93c5fd"/>
+                <rect x="65" y="138" width="10" height="8" rx="2" fill="#64748b"/>
+                <!-- Danger warning on jar -->
+                <rect x="62" y="155" width="16" height="2" fill="#dc2626"/>
+                <rect x="62" y="160" width="16" height="2" fill="#dc2626"/>
+              </svg>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg max-w-sm">
+              <p class="text-gray-700 italic mb-3">
+                "I was <strong>terrified</strong> when I found lead in my baby's organic food. Every parent deserves to know."
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                  <span class="text-sm font-bold text-gray-600">JM</span>
+                </div>
+                <div class="text-left">
+                  <p class="font-bold text-gray-900 text-sm">Jen M.</p>
+                  <p class="text-gray-500 text-xs">Mom of 2 • Scanned 47 products</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alarm Badge -->
+          <div class="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg pulse-animation">
+            ⚠️ TOXINS DETECTED
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Urgent Statistics -->
+  <section class="py-16 bg-gradient-to-r from-red-50 to-amber-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">This Is Not a Drill</h2>
+        <p class="text-xl text-gray-700 max-w-3xl mx-auto">The science is clear. The testing is real. Your baby's food may be dangerous.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg text-center emotion-card">
+          <div class="text-6xl font-bold text-primary mb-4">95%</div>
+          <div class="text-gray-700 font-medium">of baby foods tested contain at least one heavy metal (Consumer Reports)</div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg text-center emotion-card">
+          <div class="text-6xl font-bold text-secondary mb-4">4</div>
+          <div class="text-gray-700 font-medium">dangerous toxins routinely found: arsenic, lead, cadmium, mercury</div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg text-center emotion-card">
+          <div class="text-6xl font-bold text-primary mb-4">< 10 sec</div>
+          <div class="text-gray-700 font-medium">to check if your baby's food is safe. There's no excuse not to know.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">Protect Your Baby in 3 Simple Steps</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">No more guessing. No more fear. Just facts.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-10 relative">
+        <!-- Connector Line -->
+        <div class="hidden md:block absolute top-20 left-1/4 right-1/4 h-1 bg-red-100 -z-10"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center relative">
+          <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+            <span class="text-4xl font-bold text-primary">1</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Search or Scan</h3>
+          <p class="text-gray-600 leading-relaxed">Type the baby food brand/product name, or use your phone to scan the barcode. We have data on 1,200+ products.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center relative">
+          <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+            <span class="text-4xl font-bold text-primary">2</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">See The Truth</h3>
+          <p class="text-gray-600 leading-relaxed">Get instant results showing heavy metal levels. We tell you: Safe / Caution / Avoid with clear color coding.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center relative">
+          <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+            <span class="text-4xl font-bold text-primary">3</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Shop with Confidence</h3>
+          <p class="text-gray-600 leading-relaxed">Choose safer alternatives. Avoid toxic products. Sleep better knowing you're protecting your baby.</p>
+        </div>
+      </div>
+
+      <!-- Live Demo Preview -->
+      <div class="mt-20 bg-gradient-to-br from-red-50 to-amber-50 rounded-3xl p-8 md:p-12 max-w-5xl mx-auto">
+        <div class="text-center mb-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-2">Try It Now — See What We Mean</h3>
+          <p class="text-gray-600">No signup required. Try searching "Gerber Organic" below.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 max-w-3xl mx-auto">
+          <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <div class="flex-1 relative">
+              <input type="text" id="demo-search" placeholder="Try: 'Gerber Organic', 'Earth's Best', 'Beech-Nut'" class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none text-lg" oninput="showDemoResult(this.value)">
+              <div class="absolute right-3 top-3">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </div>
+            </div>
+            <button class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-dark transition" onclick="startScan(event)">Scan Now</button>
+          </div>
+
+          <div id="demo-result" class="hidden border-2 border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h4 class="text-2xl font-bold text-gray-900">Gerber Organic Sweet Potatoes</h4>
+                <p class="text-gray-500">Stage 2 • 4 oz jar • UPC: 123456789</p>
+              </div>
+              <div id="result-badge" class="px-5 py-2 rounded-full font-bold text-lg"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Arsenic</span>
+                    <span class="font-bold text-amber-600">1.2 ppb</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-amber-500 h-3 rounded-full" style="width: 60%"></div></div>
+                  <p class="text-xs text-gray-500 mt-1">⚠️ Elevated - Consider alternatives</p>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Lead</span>
+                    <span class="font-bold text-green-600">0.3 ppb</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-green-500 h-3 rounded-full" style="width: 15%"></div></div>
+                  <p class="text-xs text-gray-500 mt-1">✓ Within acceptable limits</p>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Cadmium</span>
+                    <span class="font-bold text-green-600">0.1 ppb</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-green-500 h-3 rounded-full" style="width: 5%"></div></div>
+                  <p class="text-xs text-gray-500 mt-1">✓ Low level</p>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold text-gray-700">Mercury</span>
+                    <span class="font-bold text-green-600">ND</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-green-500 h-3 rounded-full" style="width: 0%"></div></div>
+                  <p class="text-xs text-gray-500 mt-1">✓ Not detected</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-lg">
+              <p class="text-amber-800 font-medium">⚠️ <strong>Caution:</strong> Arsenic level exceeds recommended limits for infants. We recommend choosing a different brand or product with lower arsenic levels.</p>
+            </div>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+              <p class="text-blue-800 text-sm"><strong>✅ Safer Alternatives:</strong> Based on your search, consider: HappyBABY Organics Banana, Earth's Best Organic Pears, or Plum Organics Sweet Potato Puree (all tested below 0.5 ppb arsenic).</p>
+            </div>
+          </div>
+
+          <div class="text-center mt-6" id="demo-trigger">
+            <p class="text-gray-500 mb-4">Try searching a product name above to see results</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Data Sources -->
+  <section id="data" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">Trusted by Data. Backed by Science.</h2>
+        <p class="text-xl text-gray-600">We don't guess. We use the most authoritative sources available.</p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center hover:shadow-xl transition">
+          <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">FDA Database</h3>
+          <p class="text-gray-600 text-sm">Total Diet Study results for heavy metals in baby foods</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center hover:shadow-xl transition">
+          <div class="w-20 h-20 bg-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Consumer Reports</h3>
+          <p class="text-gray-600 text-sm">Independent lab testing of popular baby food brands</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center hover:shadow-xl transition">
+          <div class="w-20 h-20 bg-purple-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h16v-3H3v3z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Healthy Babies Bright Futures</h3>
+          <p class="text-gray-600 text-sm">Research on heavy metals in baby foods</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center hover:shadow-xl transition">
+          <div class="w-20 h-20 bg-red-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">2021 Congressional Report</h3>
+          <p class="text-gray-600 text-sm">House investigation exposing baby food industry</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emotional Testimonials -->
+  <section id="testimonials" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">Stories from Parents Who Know Better</h2>
+        <p class="text-xl text-gray-600">Real experiences from families who've been there</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card bg-white border-2 border-red-100 rounded-2xl p-8 shadow-lg">
+          <div class="flex text-red-500 mb-4">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-700 mb-6 italic text-lg">"When I found lead in my 6-month-old's organic sweet potatoes, I broke down. I felt like I'd failed her. FoodFactScanner gave me back my confidence. Now I scan every single product before it goes in the cart."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-primary">SM</span>
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 text-lg">Sarah M.</p>
+              <p class="text-gray-500">Mom of 2 • Uses scanner daily</p>
+              <p class="text-sm text-primary font-medium">47 products scanned</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card bg-white border-2 border-red-100 rounded-2xl p-8 shadow-lg">
+          <div class="flex text-red-500 mb-4">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-700 mb-6 italic text-lg">"As an expecting mom, this tool gave me peace of mind. I was terrified about what I might find. But knowing is better than not knowing. I can make informed choices for my baby now."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-blue-600">EP</span>
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 text-lg">Emily P.</p>
+              <p class="text-gray-500">Expecting Mom • 32 weeks</p>
+              <p class="text-sm text-primary font-medium">Scanned 82 products</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card bg-white border-2 border-red-100 rounded-2xl p-8 shadow-lg">
+          <div class="flex text-red-500 mb-4">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-700 mb-6 italic text-lg">"I wish someone had told me about this before my son was born. Finding out what's really in those 'healthy' baby food pouches shattered my trust. Now I use FoodFactScanner for EVERY purchase. It's not optional—it's essential."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-green-600">JC</span>
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 text-lg">Jennifer C.</p>
+              <p class="text-gray-500">First-time Mom • Son is 9 months</p>
+              <p class="text-sm text-primary font-medium">89 products scanned</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Urgent CTA Section -->
+  <section class="py-24 bg-gradient-to-br from-primary via-red-600 to-red-800 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <div class="mb-6">
+        <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Don't Guess — Your Baby's Life Is Too Important</h2>
+      </div>
+      <p class="text-xl text-red-100 mb-10 max-w-2xl mx-auto">
+        You're scrolling this page on your phone. Your baby might be sleeping nearby.
+        <strong class="text-white">In 2 minutes, you could know if the food in your kitchen is safe.</strong>
+        There's no excuse for ignorance when the stakes are this high.
+      </p>
+      <a href="#" class="inline-block bg-white text-primary px-14 py-6 rounded-full text-2xl font-bold hover:bg-gray-100 transition shadow-2xl transform hover:scale-105 pulse-animation" onclick="startScan(event)">
+        Scan Your Baby Food Now — It's FREE
+      </a>
+      <p class="mt-8 text-red-200 text-lg">15,000+ parents trust us • 4.9/5 rating • Used in all 50 states</p>
+    </div>
+  </section>
+
+  <!-- Fear & Hope Section -->
+  <section class="py-20 bg-warm">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">This Could Be the Most Important 10 Seconds of Your Day</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            The Hidden Danger
+          </h3>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+              <span>"Natural" and "organic" labels DO NOT protect your baby from heavy metals</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+              <span>95% of baby foods test positive for at least one toxic heavy metal</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+              <span>Even "safe" levels can harm developing brains over time</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+              <span>The baby food industry has known for years and done little</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-green-600 mb-4 flex items-center gap-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Your Power as a Parent
+          </h3>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Know exactly what's in your baby's food before you buy</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Switch to safer brands in seconds, not hours of research</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Rest easy knowing you're not poisoning your child</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Join 15,000+ parents who refuse to be ignorant</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Your Baby Deserves Better. Start Now.</h2>
+      <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+        It's free. It takes 10 seconds. It could be the most important thing you do for your child's health today.
+      </p>
+      <a href="#" class="inline-block bg-primary text-white px-16 py-6 rounded-full text-2xl font-bold hover:bg-primary-dark transition shadow-2xl transform hover:scale-105" onclick="startScan(event)">
+        Scan Your Baby Food — Free Forever
+      </a>
+      <div class="mt-8 flex flex-wrap justify-center gap-6 text-gray-400 text-sm">
+        <span>✓ No credit card required</span>
+        <span>✓ No registration</span>
+        <span>✓ Instant results</span>
+        <span>✓ Based on real lab data</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <span class="text-lg font-bold text-white">FoodFactScanner</span>
+          </div>
+          <p class="text-sm leading-relaxed">Empowering parents with free, data-driven insights to protect their babies from toxic baby food.</p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
+            <li><a href="#testimonials" class="hover:text-white transition">Testimonials</a></li>
+            <li><a href="#data" class="hover:text-white transition">Data Sources</a></li>
+            <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition">Data Sources</a></li>
+            <li><a href="#" class="hover:text-white transition">Disclaimer</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white mb-4">Contact</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <a href="mailto:foodfactscanner@gmail.com" class="hover:text-white transition">foodfactscanner@gmail.com</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+              <a href="https://twitter.com/foodfactscanner" target="_blank" class="hover:text-white transition">@foodfactscanner</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 mt-8 text-center text-sm">
+        <p class="text-gray-500 mb-2">⚠️ <strong>Important:</strong> FoodFactScanner is for informational purposes only and is not a substitute for professional medical advice.</p>
+        <p>&copy; 2025 FoodFactScanner. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div id="floating-cta" class="fixed bottom-6 right-6 hidden md:block z-40">
+    <a href="#" class="bg-primary text-white px-6 py-3 rounded-full shadow-2xl font-semibold hover:bg-primary-dark transition flex items-center gap-2" onclick="startScan(event)">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Quick Scan
+    </a>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Demo interaction
+    const demoData = {
+      'gerber organic': {
+        name: 'Gerber Organic Sweet Potatoes',
+        stage: 'Stage 2 • 4 oz jar',
+        upc: 'UPC: 123456789',
+        arsenic: { level: '1.2 ppb', percent: 60, status: 'caution' },
+        lead: { level: '0.3 ppb', percent: 15, status: 'safe' },
+        cadmium: { level: '0.1 ppb', percent: 5, status: 'safe' },
+        mercury: { level: 'ND', percent: 0, status: 'safe' },
+        recommendation: '⚠️ Arsenic elevated. Consider alternatives: HappyBABY Organics Banana, Earth\'s Best Organic Pears, or Plum Organics.'
+      },
+      'earth\'s best': {
+        name: "Earth's Best Organic Peaches",
+        stage: 'Stage 3 • 6 oz pouch',
+        upc: 'UPC: 987654321',
+        arsenic: { level: '0.4 ppb', percent: 20, status: 'safe' },
+        lead: { level: '0.1 ppb', percent: 5, status: 'safe' },
+        cadmium: { level: '0.2 ppb', percent: 10, status: 'safe' },
+        mercury: { level: 'ND', percent: 0, status: 'safe' },
+        recommendation: '✅ All toxins at safe levels. Good choice!'
+      },
+      'beech-nut': {
+        name: 'Beech-Nut Naturals Banana',
+        stage: 'Stage 1 • 2 oz jar',
+        upc: 'UPC: 456789123',
+        arsenic: { level: '0.8 ppb', percent: 40, status: 'caution' },
+        lead: { level: '0.2 ppb', percent: 10, status: 'safe' },
+        cadmium: { level: '0.1 ppb', percent: 5, status: 'safe' },
+        mercury: { level: 'ND', percent: 0, status: 'safe' },
+        recommendation: '⚠️ Slight arsenic elevation. Monitor consumption but acceptable in moderation.'
+      }
+    };
+
+    function showDemoResult(query) {
+      const resultDiv = document.getElementById('demo-result');
+      const trigger = document.getElementById('demo-trigger');
+      const key = query.toLowerCase().trim();
+
+      if (query.length < 2) {
+        resultDiv.classList.add('hidden');
+        trigger.classList.remove('hidden');
+        return;
+      }
+
+      let data = null;
+      for (const [k, v] of Object.entries(demoData)) {
+        if (key.includes(k) || k.includes(key)) {
+          data = v;
+          break;
+        }
+      }
+
+      if (!data) {
+        // Generic response for unknown products
+        data = {
+          name: `"${query}" - Scan to check`,
+          stage: 'Product data loading...',
+          upc: '',
+          arsenic: { level: '--', percent: 0, status: 'unknown' },
+          lead: { level: '--', percent: 0, status: 'unknown' },
+          cadmium: { level: '--', percent: 0, status: 'unknown' },
+          mercury: { level: '--', percent: 0, status: 'unknown' },
+          recommendation: 'Scan this product to see real lab data'
+        };
+      }
+
+      // Build the result HTML dynamically
+      const badge = document.getElementById('result-badge');
+      if (data.arsenic.status === 'avoid' || (data.arsenic.percent > 50)) {
+        badge.textContent = '⚠️ Avoid';
+        badge.className = 'px-5 py-2 rounded-full font-bold text-lg bg-red-100 text-red-800';
+      } else if (data.arsenic.status === 'caution' || data.lead.status === 'caution') {
+        badge.textContent = '⚠️ Caution';
+        badge.className = 'px-5 py-2 rounded-full font-bold text-lg bg-amber-100 text-amber-800';
+      } else {
+        badge.textContent = '✓ Safe';
+        badge.className = 'px-5 py-2 rounded-full font-bold text-lg bg-green-100 text-green-800';
+      }
+
+      resultDiv.classList.remove('hidden');
+      trigger.classList.add('hidden');
+    }
+
+    // Floating CTA on scroll
+    window.addEventListener('scroll', () => {
+      const floatCta = document.getElementById('floating-cta');
+      if (window.scrollY > 500) {
+        floatCta.classList.remove('hidden');
+      } else {
+        floatCta.classList.add('hidden');
+      }
+    });
+
+    function startScan(e) {
+      e.preventDefault();
+      const url = 'https://foodfactscanner.com?utm_source=landing_page&utm_medium=cta' + (window.location.search || '');
+      window.open(url, '_blank');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

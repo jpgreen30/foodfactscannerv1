@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular safety badge -->
+  <circle cx="256" cy="256" r="200" fill="url(#badge-gradient)"/>
+  <circle cx="256" cy="256" r="180" fill="white"/>
+  
+  <!-- Scanning radar waves from center -->
+  <g opacity="0.9">
+    <path d="M256 156V96" stroke="#0891B2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M256 356V416" stroke="#0891B2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M156 256H96" stroke="#0891B2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M356 256H416" stroke="#0891B2" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Central apple/food icon with leaf -->
+  <path d="M256 196C256 196 208 208 208 256C208 304 256 316 256 316" stroke="#DC2626" stroke-width="12" stroke-linecap="round"/>
+  <path d="M256 196C256 196 304 208 304 256C304 304 256 316 256 316" stroke="#DC2626" stroke-width="12" stroke-linecap="round"/>
+  <path d="M256 176V196" stroke="#16A34A" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 160C256 160 244 148 244 168" stroke="#16A34A" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Checkmark (safe) -->
+  <path d="M220 256L240 276L292 224" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <defs>
+    <linearGradient id="badge-gradient" x1="56" y1="56" x2="456" y2="456" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0D9488"/>
+    </linearGradient>
+  </defs>
+</svg>

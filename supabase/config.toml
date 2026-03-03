@@ -1,0 +1,100 @@
+project_id = "vzwbngmfqhurlcienera"
+
+[functions.analyze-food-label]
+verify_jwt = false
+
+[functions.lookup-barcode]
+verify_jwt = false
+
+[functions.analyze-barcode-product]
+verify_jwt = false
+
+[functions.analyze-shopping-list]
+verify_jwt = false
+
+[functions.ai-meal-planner]
+verify_jwt = false
+
+[functions.register-push-token]
+verify_jwt = false
+
+[functions.send-push-notification]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.check-subscription]
+verify_jwt = false
+
+[functions.customer-portal]
+verify_jwt = false
+
+[functions.elevenlabs-tts]
+verify_jwt = false
+
+[functions.check-fda-recalls]
+verify_jwt = false
+
+[functions.send-recall-email]
+verify_jwt = false
+
+[functions.send-recall-alert]
+verify_jwt = false
+
+[functions.trigger-zapier-webhook]
+verify_jwt = false
+
+[functions.send-toxic-alert-email]
+verify_jwt = false
+
+[functions.distribute-lead]
+verify_jwt = false
+
+[functions.generate-health-report]
+verify_jwt = false
+
+[functions.ingredient-chat]
+verify_jwt = false
+
+[functions.generate-health-pdf]
+verify_jwt = false
+
+[functions.public-api]
+verify_jwt = false
+
+[functions.check-drug-interactions]
+verify_jwt = false
+
+[functions.quick-meal-suggestions]
+verify_jwt = false
+
+[functions.sendgrid-email]
+verify_jwt = false
+
+[functions.notify-admin-registration]
+verify_jwt = false
+
+[functions.send-sms]
+verify_jwt = false
+
+[functions.submit-bing-urls]
+verify_jwt = false
+
+[functions.klaviyo-sync]
+verify_jwt = false
+
+[functions.send-legal-reminders]
+verify_jwt = false
+
+[functions.check-food-drug-interactions]
+verify_jwt = false
+
+[functions.generate-cheat-sheet-pdf]
+verify_jwt = false
+
+[functions.send-lead-magnet]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false

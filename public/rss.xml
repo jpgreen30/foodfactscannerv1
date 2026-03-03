@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FoodFactScanner Blog - Baby Food Safety</title>
+    <link>https://foodfactscanner.com/blog</link>
+    <description>Expert articles on baby food safety, FDA recalls, toxic ingredients, and heavy metals.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 20 Feb 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://foodfactscanner.com/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>FDA Issues Major Baby Food Recall: What Parents Need to Know</title>
+      <link>https://foodfactscanner.com/blog/fda-baby-food-recall-january-2025</link>
+      <guid>https://foodfactscanner.com/blog/fda-baby-food-recall-january-2025</guid>
+      <pubDate>Sun, 19 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>FDA Recalls</category>
+      <description>The FDA has recalled multiple baby food products due to potential contamination. Learn which products are affected and how to protect your baby.</description>
+    </item>
+
+    <item>
+      <title>Heavy Metals in Baby Food: The Hidden Danger of Arsenic and Lead</title>
+      <link>https://foodfactscanner.com/blog/heavy-metals-baby-food-arsenic-lead</link>
+      <guid>https://foodfactscanner.com/blog/heavy-metals-baby-food-arsenic-lead</guid>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Heavy Metals</category>
+      <description>Research reveals alarming levels of arsenic, lead, cadmium, and mercury in popular baby food brands. Learn which products to avoid and how to minimize exposure.</description>
+    </item>
+
+    <item>
+      <title>15 Toxic Ingredients Hiding in Baby Food Labels</title>
+      <link>https://foodfactscanner.com/blog/15-toxic-ingredients-baby-food-labels</link>
+      <guid>https://foodfactscanner.com/blog/15-toxic-ingredients-baby-food-labels</guid>
+      <pubDate>Sun, 12 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Toxic Ingredients</category>
+      <description>A comprehensive guide to the most concerning ingredients found in baby food products, from artificial additives to hidden allergens.</description>
+    </item>
+
+    <item>
+      <title>The Safest Baby Food Brands in 2025: A Complete Guide</title>
+      <link>https://foodfactscanner.com/blog/safest-baby-food-brands-2025</link>
+      <guid>https://foodfactscanner.com/blog/safest-baby-food-brands-2025</guid>
+      <pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Safe Alternatives</category>
+      <description>Our expert team tested and ranked the safest baby food brands available. Find out which brands passed our rigorous safety standards.</description>
+    </item>
+
+    <item>
+      <title>Homemade Baby Food: A Beginner&apos;s Guide to Safe Preparation</title>
+      <link>https://foodfactscanner.com/blog/homemade-baby-food-beginners-guide</link>
+      <guid>https://foodfactscanner.com/blog/homemade-baby-food-beginners-guide</guid>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Parenting Tips</category>
+      <description>Step-by-step guide to making safe, nutritious homemade baby food. Includes recipes, storage tips, and safety guidelines.</description>
+    </item>
+
+    <item>
+      <title>Beech-Nut vs Gerber: Baby Food Safety Comparison</title>
+      <link>https://foodfactscanner.com/blog/beechnut-vs-gerber-baby-food-safety-comparison</link>
+      <guid>https://foodfactscanner.com/blog/beechnut-vs-gerber-baby-food-safety-comparison</guid>
+      <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Safe Alternatives</category>
+      <description>A head-to-head comparison of two major baby food brands on safety, ingredients, and heavy metal testing.</description>
+    </item>
+
+    <item>
+      <title>Best Organic Baby Food Brands in 2025</title>
+      <link>https://foodfactscanner.com/blog/best-organic-baby-food-brands-2025</link>
+      <guid>https://foodfactscanner.com/blog/best-organic-baby-food-brands-2025</guid>
+      <pubDate>Fri, 03 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Safe Alternatives</category>
+      <description>Our picks for the best organic baby food brands that prioritize safety and nutrition.</description>
+    </item>
+
+    <item>
+      <title>When to Start Baby Cereal: A Pediatrician&apos;s Guide</title>
+      <link>https://foodfactscanner.com/blog/when-start-baby-cereal-pediatrician-guide</link>
+      <guid>https://foodfactscanner.com/blog/when-start-baby-cereal-pediatrician-guide</guid>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+      <author>Dr. Sarah Chen</author>
+      <category>Parenting Tips</category>
+      <description>Expert guidance on when and how to safely introduce baby cereal, including which cereals to avoid due to heavy metal concerns.</description>
+    </item>
+
+  </channel>
+</rss>

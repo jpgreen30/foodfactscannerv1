@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "skills": {
+    "automation-workflows": {
+      "version": "0.1.0",
+      "installedAt": 1771467721374
+    },
+    "firecrawl-search": {
+      "version": "1.0.0",
+      "installedAt": 1771467726980
+    },
+    "app-builder": {
+      "version": "1.0.0",
+      "installedAt": 1771467733383
+    },
+    "business-development": {
+      "version": "1.0.0",
+      "installedAt": 1771467739067
+    },
+    "social-media-agent": {
+      "version": "1.0.0",
+      "installedAt": 1771467744903
+    },
+    "email-marketing": {
+      "version": "1.0.0",
+      "installedAt": 1771467751431
+    },
+    "business-model-canvas": {
+      "version": "0.1.0",
+      "installedAt": 1771467755340
+    }
+  }
+}

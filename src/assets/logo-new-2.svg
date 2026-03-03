@@ -1,0 +1,23 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stylized baby bottle -->
+  <path d="M224 160C224 140.61 239.61 128 256 128C272.39 128 288 140.61 288 160V368C288 387.74 273.82 416 256.93 424.86C240.05 433.72 224.67 414.14 224.67 394.35C224.67 374.57 240.05 353 256.93 361.85C273.82 370.71 288 399.31 288 418V450H224V368C224 340.03 244.03 320 272 320C299.97 320 320 340.03 320 368V450H192V368C192 340.03 212.03 320 240 320C267.97 320 288 340.03 288 368V160H224Z" fill="url(#bottle-gradient)"/>
+  
+  <!-- Scanner crosshairs overlay -->
+  <circle cx="256" cy="240" r="40" stroke="white" stroke-width="6" opacity="0.8"/>
+  <line x1="256" y1="200" x2="256" y2="280" stroke="white" stroke-width="4"/>
+  <line x1="216" y1="240" x2="296" y2="240" stroke="white" stroke-width="4"/>
+  
+  <!-- Protective arc around bottle -->
+  <path d="M160 200C160 118.17 232.17 56 309.33 56C386.5 56 458.67 118.17 458.67 200" stroke="url(#arc-gradient)" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+
+  <defs>
+    <linearGradient id="bottle-gradient" x1="192" y1="128" x2="320" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="arc-gradient" x1="160" y1="128" x2="458.67" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FEF08A"/>
+      <stop offset="1" stop-color="#FCD34D"/>
+    </linearGradient>
+  </defs>
+</svg>

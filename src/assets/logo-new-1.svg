@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield background -->
+  <path d="M256 32L64 160V384C64 432 100.52 480 156.32 496.98C207.45 512.31 264.31 513.13 310.73 499.44C357.15 485.75 391.43 457.92 405.37 415.1C419.3 372.28 412.11 322.15 394.59 281.53C377.07 240.91 349.4 210.87 309.46 192.72L256 160L202.54 192.72C162.6 210.87 134.93 240.91 117.41 281.53C99.89 322.15 92.7 372.28 106.63 415.1C120.57 457.92 154.85 485.75 201.27 499.44C247.69 513.13 304.55 512.31 355.68 496.98C411.48 480 448 432 448 384V160L256 32Z" fill="url(#shield-gradient)" stroke="url(#shield-stroke)" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Scanner beam -->
+  <path d="M176 240L256 160L336 240" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <line x1="256" y1="160" x2="256" y2="336" stroke="white" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Baby food jar icon -->
+  <rect x="232" y="208" width="48" height="80" rx="8" fill="white" opacity="0.95"/>
+  <rect x="240" y="260" width="32" height="20" rx="4" fill="url(#jar-gradient)"/>
+  <path d="M248 260C248 251 255 244 264 244C273 244 280 251 280 260" stroke="white" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Warning triangle on jar (toxin detection) -->
+  <path d="M256 246L264 258L248 258L256 246Z" fill="#DC2626" opacity="0.8"/>
+
+  <defs>
+    <linearGradient id="shield-gradient" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0891B2"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <linearGradient id="shield-stroke" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="jar-gradient" x1="240" y1="260" x2="280" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCD34D"/>
+      <stop offset="1" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "name": "twitter-automation",
+  "version": "1.0.0",
+  "description": "Automated Twitter/X posting and monitoring for FoodFactScanner",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dry-run": "node index.js --dry-run",
+    "test": "node -e \"console.log('OK')\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.8",
+    "puppeteer": "^24.0.0"
+  },
+  "keywords": ["twitter", "x", "automation", "puppeteer"],
+  "author": "",
+  "license": "ISC"
+}

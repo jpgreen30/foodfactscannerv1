@@ -1,0 +1,13 @@
+{
+  "name": "foodfactscanner-redesign",
+  "version": "1.0.0",
+  "description": "Conversion-optimized landing page for FoodFactScanner",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -p 3000",
+    "dev": "npx live-server --port=3000"
+  },
+  "keywords": ["landing-page", "conversion-optimized"],
+  "author": "",
+  "license": "ISC"
+}

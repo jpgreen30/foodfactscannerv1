@@ -1,0 +1,15 @@
+{
+  "postsCreated": 0,
+  "commentsReplied": 0,
+  "errors": [
+    {
+      "time": "2026-02-25T13:44:08.661Z",
+      "error": "Waiting for selector `input[name=\"username\"]` failed"
+    },
+    {
+      "time": "2026-02-25T13:44:56.591Z",
+      "error": "Waiting for selector `input[name=\"username\"]` failed"
+    }
+  ],
+  "startTime": "2026-02-25T13:43:32.659Z"
+}
